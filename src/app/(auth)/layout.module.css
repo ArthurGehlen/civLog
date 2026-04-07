@@ -6,3 +6,43 @@
   background-color: #141416;
   color: #e8e8e8;
 }
+
+.auth_container {
+  width: 25rem;
+  height: 30rem;;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.input_container,
+.submit_btn {
+  padding: .8rem;
+  border: 1px solid transparent;
+}
+
+.submit_btn {
+  background-color: #c9a84c;
+  transition: .4s ease all;
+}
+
+.submit_btn:hover {
+  background-color: transparent;
+  border: 1px solid #c9a84c;
+  color: #e8e8e8;
+}
