@@ -1,5 +1,10 @@
+export const metadata = {
+  title: "CivLog - Home",
+  description: "Página home do CivLog",
+};
+
 const page = () => {
-  return <div>page</div>;
+  return <div>Home</div>;
 };
 
 export default page;

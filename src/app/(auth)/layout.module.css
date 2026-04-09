@@ -5,6 +5,7 @@
   justify-content: center;
   background-color: #141416;
   color: #e8e8e8;
+  font-size: 1rem;
   overflow-y: auto;
 }
 
@@ -39,6 +40,12 @@
   padding: 0.8rem;
   border: 1px solid transparent;
   border-radius: 0.4rem;
+}
+
+.input_container {
+  background-color: transparent;
+  border: 1px solid #c9a84c;
+  color: #c9a84c;
 }
 
 .input_container:focus {

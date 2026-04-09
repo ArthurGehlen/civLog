@@ -6,11 +6,13 @@ import { useState } from "react";
 
 // Hooks
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [errors, setErrors] = useState({});
 
   const supabase = createClient();
+  const router = useRouter();
 
   const handle_signup = async (e) => {
     e.preventDefault();
@@ -19,10 +21,10 @@ const page = () => {
 
     const email = form.get("email");
     const password = form.get("password");
-    const confirmPassword = form.get("confirmPassword");
+    const confirm_password = form.get("confirm_password");
     const username = form.get("username");
 
-    if (password !== confirmPassword) {
+    if (password !== confirm_password) {
       console.error("Senhas não coincidem");
       return;
     }
@@ -57,7 +59,7 @@ const page = () => {
           </label>
           <input
             className={styles.input_container}
-            type="username"
+            type="text"
             id="username"
             name="username"
             placeholder="Máximo de 50 caracteres"
@@ -98,8 +100,8 @@ const page = () => {
           <input
             className={styles.input_container}
             type="password"
-            name="confirmPassword"
-            id="confirmPassword"
+            name="confirm_password"
+            id="confirm_password"
           />
         </div>
 
