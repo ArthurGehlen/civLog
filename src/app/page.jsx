@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 import Link from "next/link";
 
 // Components
-import Logo from "@/components/Layout/Logo/Logo";
+import Logo from "@/components/layout/Logo/Logo";
 
 const page = () => {
   return (

@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 // Components
 import Link from "next/link";
-import Captcha from "@/components/Captcha/Captcha";
+import Captcha from "@/components/captcha/Captcha";
 import { toast } from "sonner";
 
 const page = () => {
