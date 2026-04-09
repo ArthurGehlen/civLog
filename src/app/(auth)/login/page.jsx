@@ -9,13 +9,16 @@ import { useRouter } from "next/navigation";
 
 // Components
 import Link from "next/link";
+import Captcha from "@/components/Captcha/Captcha";
+import { toast } from "sonner";
 
 const page = () => {
   const supabase = createClient();
   const router = useRouter();
+
   const [loading, setLoading] = useState(false);
-  const [globalError, setGlobalError] = useState(null);
   const [fieldErrors, setFieldErrors] = useState({});
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const validate = ({ email, password }) => {
     const errors = {};
@@ -26,7 +29,12 @@ const page = () => {
 
   const handle_submit = async (e) => {
     e.preventDefault();
-    setGlobalError(null);
+
+    if (!captchaToken) {
+      toast.error("Confirme que você não é um robô :)");
+      return;
+    }
+
     setFieldErrors({});
 
     const form = new FormData(e.currentTarget);
@@ -44,14 +52,16 @@ const page = () => {
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
+      options: { captchaToken },
     });
 
     if (error) {
-      setGlobalError("Email ou senha incorretos.");
+      toast.error("Email ou senha incorretos.");
       setLoading(false);
       return;
     }
 
+    toast.success("Login efetuado com sucesso!");
     router.push("/home");
   };
 
@@ -92,7 +102,7 @@ const page = () => {
           )}
         </div>
 
-        {globalError && <p className={styles.error_message}>{globalError}</p>}
+        <Captcha onVerify={(token) => setCaptchaToken(token)} />
 
         <button type="submit" className={styles.submit_btn} disabled={loading}>
           {loading ? "Entrando..." : "Entrar"}

@@ -9,13 +9,15 @@ import { useRouter } from "next/navigation";
 
 // Components
 import Link from "next/link";
+import Captcha from "@/components/Captcha/Captcha";
+import { toast } from "sonner";
 
 const page = () => {
   const supabase = createClient();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [globalError, setGlobalError] = useState(null);
   const [fieldErrors, setFieldErrors] = useState({});
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const validate = ({ username, email, password, confirmPassword }) => {
     const errors = {};
@@ -33,7 +35,12 @@ const page = () => {
 
   const handle_signup = async (e) => {
     e.preventDefault();
-    setGlobalError(null);
+
+    if (!captchaToken) {
+      toast.error("Confirme que você não é um robô :)");
+      return;
+    }
+
     setFieldErrors({});
 
     const form = new FormData(e.currentTarget);
@@ -53,17 +60,18 @@ const page = () => {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { username } },
+      options: { data: { username }, captchaToken },
     });
 
     if (error) {
       if (error.message.includes("already registered"))
-        setGlobalError("Este email já está cadastrado.");
-      else setGlobalError("Erro ao criar conta. Tente novamente.");
+        toast.error("Este email já está cadastrado.");
+      else toast.error("Erro ao criar conta. Tente novamente.");
       setLoading(false);
       return;
     }
 
+    toast.success("Conta criada com sucesso!");
     router.push("/home");
   };
 
@@ -138,7 +146,7 @@ const page = () => {
           )}
         </div>
 
-        {globalError && <p className={styles.error_message}>{globalError}</p>}
+        <Captcha onVerify={(token) => setCaptchaToken(token)} />
 
         <button type="submit" className={styles.submit_btn} disabled={loading}>
           {loading ? "Criando conta..." : "Criar Conta"}

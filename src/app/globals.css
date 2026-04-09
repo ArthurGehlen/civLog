@@ -1,3 +1,7 @@
+:root {
+  --global_component_padding: 2rem;
+}
+
 html {
   height: 100%;
   max-height: 100vh;
@@ -36,4 +40,14 @@ button {
 
 ul {
   list-style: none;
+}
+
+.toast_success {
+  border-color: #4caf7a !important;
+  color: #4caf7a !important;
+}
+
+.toast_error {
+  border-color: #e05c5c !important;
+  color: #e05c5c !important;
 }

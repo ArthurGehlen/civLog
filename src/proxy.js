@@ -28,24 +28,49 @@ export default async function proxy(request) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  const pathname = request.nextUrl.pathname;
+
+  if (
+    user &&
+    (pathname.startsWith("/login") || pathname.startsWith("/signup"))
+  ) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/home";
+    return NextResponse.redirect(url);
+  }
 
   if (
     !user &&
-    !request.nextUrl.pathname.startsWith("/login") &&
-    !request.nextUrl.pathname.startsWith("/auth")
+    !pathname.startsWith("/login") &&
+    !pathname.startsWith("/signup") &&
+    !pathname.startsWith("/auth")
   ) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);
   }
 
-  console.log(user);
+  if (user && pathname.startsWith("/admin")) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("is_admin")
+      .eq("auth_user_id", user.id)
+      .single();
+
+    if (!profile?.is_admin) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/home";
+      return NextResponse.redirect(url);
+    }
+  }
 
   return supabaseResponse;
 }
 
 export const config = {
   matcher: [
+    "/login",
+    "/signup",
     "/home",
     "/leaderboard",
     "/partidas/:path*",

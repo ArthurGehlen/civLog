@@ -1,25 +1,27 @@
-// src/_lib/context/UserContext.jsx
 "use client";
-// Utils
 import { createClient } from "@/_lib/supabase/client";
-
-// Hooks
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []); // cria só uma vez
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let ignore = false;
+
     const get_user = async () => {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+      if (ignore) return;
+
       if (!user) {
+        setUser(null);
+        setProfile(null);
         setLoading(false);
         return;
       }
@@ -32,21 +34,27 @@ export const UserProvider = ({ children }) => {
         .eq("auth_user_id", user.id)
         .single();
 
-      setProfile(data);
-      setLoading(false);
+      if (!ignore) {
+        setProfile(data);
+        setLoading(false);
+      }
     };
 
     get_user();
 
-    // listener para logout e login
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(() => {
-      get_user();
+    } = supabase.auth.onAuthStateChange((event) => {
+      if (["SIGNED_IN", "SIGNED_OUT", "TOKEN_REFRESHED"].includes(event)) {
+        get_user();
+      }
     });
 
-    return () => subscription.unsubscribe();
-  }, []);
+    return () => {
+      ignore = true;
+      subscription.unsubscribe();
+    };
+  }, [supabase]);
 
   return (
     <UserContext.Provider value={{ user, profile, loading }}>

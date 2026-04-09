@@ -5,8 +5,8 @@ import styles from "./layout.module.css";
 import { UserProvider } from "@/_lib/context/UserContext";
 
 // Components
-import Header from "@/components/layout/Header/Header";
-import Footer from "@/components/layout/Footer/Footer";
+import Header from "@/components/Layout/Header/Header";
+import Footer from "@/components/Layout/Footer/Footer";
 
 const layout = ({ children }) => {
   return (
