@@ -10,7 +10,11 @@ import { usePathname } from "next/navigation";
 import Logo from "../Logo/Logo";
 import Link from "next/link";
 
+// Context
+import { useUser } from "@/_lib/context/UserContext";
+
 const Header = () => {
+  const { profile } = useUser();
   const pathname = usePathname();
 
   const header_links = [
@@ -41,6 +45,7 @@ const Header = () => {
             </li>
           ))}
         </ul>
+
 
         <button>user</button>
       </div>

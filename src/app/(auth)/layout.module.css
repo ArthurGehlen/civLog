@@ -90,3 +90,54 @@
   height: 1px;
   background-color: #a0a0a8;
 }
+
+.auth_title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #e8e8e8;
+  align-self: flex-start;
+}
+
+.input_label {
+  font-size: 0.875rem;
+  color: #a0a0a8;
+}
+
+.input_container::placeholder {
+  color: #666666;
+}
+
+.submit_btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submit_btn:disabled:hover {
+  background-color: #c9a84c;
+  border: 1px solid transparent;
+  color: inherit;
+}
+
+.error_message {
+  font-size: 0.875rem;
+  color: #e05c5c;
+  background-color: rgba(224, 92, 92, 0.08);
+  border: 1px solid rgba(224, 92, 92, 0.25);
+  border-radius: 0.4rem;
+  padding: 0.6rem 0.8rem;
+}
+
+.field_error {
+  font-size: 0.75rem;
+  color: #e05c5c;
+  margin-top: 0.1rem;
+}
+
+.input_invalid {
+  border-color: #e05c5c;
+  color: #e05c5c;
+}
+
+.input_invalid:focus {
+  outline-color: #e05c5c;
+}
