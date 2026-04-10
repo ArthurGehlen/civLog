@@ -16,11 +16,13 @@ import Link from "next/link";
 
 // Icons
 import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 // Context
 import { useUser } from "@/_lib/context/UserContext";
 
 const Header = () => {
+  const [toggleMenu, setToggleMenu] = useState(true);
   const { profile } = useUser();
   const supabase = createClient();
   const pathname = usePathname();
@@ -51,7 +53,6 @@ const Header = () => {
         </Link>
       </h1>
 
-      {/* nav desktop */}
       <div className={styles.header_info_wrapper}>
         <ul className={styles.header_links}>
           {header_links.map((link) => (
@@ -66,12 +67,34 @@ const Header = () => {
           ))}
         </ul>
 
-        {/* menu do usuário desktop */}
         <div className={styles.user_menu_wrapper}>
-          <button className={styles.config_menu_btn}>
-            <FontAwesomeIcon style={{ marginRight: ".4rem" }} icon={faUser} />
-            {profile ? profile.nickname : "Carregando..."}
-          </button>
+          <div className={styles.upper_menu}>
+            <Link className={styles.config_link_btn} href="/configuracoes">
+              <FontAwesomeIcon style={{ marginRight: ".4rem" }} icon={faUser} />
+              {profile ? profile.nickname : "..."}
+            </Link>
+            <button
+              className={styles.active_menu_btn}
+              style={{ color: "white" }}
+              onClick={() => setToggleMenu(!toggleMenu)}
+            >
+              <FontAwesomeIcon icon={faBars} size="lg" />
+            </button>
+          </div>
+          {toggleMenu && (
+            <div className={styles.menu}>
+              {header_links.map((link) => (
+                <li key={link.id}>
+                  <Link
+                    href={link.path}
+                    className={pathname === link.path ? styles.active : ""}
+                  >
+                    {link.content}
+                  </Link>
+                </li>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </header>

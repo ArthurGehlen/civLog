@@ -73,6 +73,7 @@ export const config = {
     "/signup",
     "/home",
     "/leaderboard",
+    "/configuracoes",
     "/partidas/:path*",
     "/perfis/:path*",
     "/admin/:path*",
