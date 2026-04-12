@@ -1,0 +1,12 @@
+.content {
+  height: calc(100vh - 7rem - 5.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.content img {
+  max-width: 90%;
+}

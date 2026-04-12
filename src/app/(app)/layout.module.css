@@ -1,0 +1,11 @@
+.main_content {
+  padding: var(--global_component_padding);
+  position: relative;
+  height: calc(100vh - 7rem - 5.5rem);
+}
+
+@media screen and (max-width: 709px) {
+  .main_content {
+    padding: var(--global_component_padding_mobile);
+  }
+}
