@@ -1,5 +1,5 @@
 :root {
-  --global_component_padding_mobile: 2rem;
+  --global_component_padding_mobile: 2rem 1rem;
   --global_component_padding: 2rem 4rem;
 }
 

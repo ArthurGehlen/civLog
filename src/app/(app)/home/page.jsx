@@ -31,8 +31,12 @@ const Page = () => {
           organization,
           map_types ( name ),
           map_sizes ( name ),
-          game_speeds ( name ) 
-          `, // modo de acessar os atributos nas tabelas N:N nome_da_tabela (campo)
+          game_speeds ( name ),
+          game_players (
+            is_winner,
+            profiles ( nickname, avatar_url ),
+            civilizations ( name, icon_url )
+          )`,
         )
         .order("created_at", { ascending: false })
         .limit(3);
@@ -42,13 +46,13 @@ const Page = () => {
       }
 
       setLastMatches(data);
-      console.log(data);
     };
 
     load_last_matches();
   }, []);
 
   // NÃO DEIXAR CONSOLE.LOG() NO CÓDIGO :)
+  // Quantas vezes eu deixei console.log() no código: 1
 
   return (
     <>

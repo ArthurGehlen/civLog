@@ -3,6 +3,7 @@ import styles from "./GameCard.module.css";
 
 // Components
 import Link from "next/link";
+import Image from "next/image";
 
 const GameCard = ({ game_obj }) => {
   const date_formatter = new Intl.DateTimeFormat("pt-BR", {
@@ -11,11 +12,17 @@ const GameCard = ({ game_obj }) => {
     year: "numeric",
   });
 
+  const winners = game_obj.game_players.filter((p) => p.is_winner);
+
   return (
     <div className={styles.game_card}>
       <header className={styles.game_info}>
-        <h3>Jogo 1</h3>
-        <span>{game_obj.is_completed ? "Concluída" : "Agendada"}</span>
+        <h2>{game_obj.name}</h2>
+        <span
+          className={`${game_obj.is_completed} ? ${styles.completed} : ${styles.pending}`}
+        >
+          {game_obj.is_completed ? "Concluída" : "Agendada"}
+        </span>
       </header>
       <div className={styles.game_dates}>
         <p>
@@ -34,9 +41,23 @@ const GameCard = ({ game_obj }) => {
           </p>
         )}
       </div>
-      <div className="game_card_content">
-        <p>Vencedor(res):</p>
-        <p>Jogadores:</p>
+      <div className={styles.game_card_content}>
+        <p>
+          {winners.length > 1 ? "Vencedores" : "Vencedor"}:{" "}
+          {winners.map((p, i) => (
+            <span key={i}>
+              {p.profiles.nickname} — {p.civilizations?.name}
+            </span>
+          ))}
+        </p>
+        <p>
+          Jogadores:{" "}
+          {game_obj.game_players.map((p, i) => (
+            <span key={i}>
+              {p.profiles.nickname} ({p.civilizations?.name ?? "Sem civ"})
+            </span>
+          ))}
+        </p>
         <p>{game_obj.organization}</p>
         <Link href={`/partidas/${game_obj.id}`}>Ver Detalhes</Link>
       </div>

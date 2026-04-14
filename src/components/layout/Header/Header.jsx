@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Hooks
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Components
 import Logo from "../Logo/Logo";
@@ -23,6 +24,7 @@ const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const { profile } = useUser();
   const pathname = usePathname();
+  const is_mobile = useIsMobile();
 
   const header_links = [
     { id: 1, content: "Home", path: "/home" },
@@ -30,6 +32,14 @@ const Header = () => {
     { id: 3, content: "Leaderboard", path: "/leaderboard" },
     { id: 4, content: "Perfis", path: "/perfis" },
   ];
+
+  function format_nickname(nickname) {
+    if (!nickname) return "...";
+
+    const firstName = nickname.split(" ")[0];
+
+    return firstName.length > 8 ? firstName.slice(0, 6) + "…" : firstName;
+  }
 
   return (
     <header className={styles.header_wrapper}>
@@ -56,8 +66,12 @@ const Header = () => {
         <div className={styles.user_menu_wrapper}>
           <div className={styles.upper_menu}>
             <Link className={styles.config_link_btn} href="/configuracoes">
-              <FontAwesomeIcon style={{ marginRight: ".4rem" }} icon={faUser} />
-              {profile ? profile.nickname : "..."}
+              <FontAwesomeIcon style={{ flexShrink: 0 }} icon={faUser} />
+              <span className={styles.nickname_displayer}>
+                {is_mobile
+                  ? format_nickname(profile?.nickname)
+                  : (profile?.nickname ?? "...")}
+              </span>
             </Link>
             <button
               className={styles.active_menu_btn}
