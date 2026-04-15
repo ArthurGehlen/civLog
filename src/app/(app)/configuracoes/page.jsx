@@ -10,12 +10,16 @@ import { useRouter } from "next/navigation";
 // Icons
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
+// Context
+import { useUser } from "@/_lib/context/UserContext";
+
 // Components
 import { toast } from "sonner";
 
 const page = () => {
   const supabase = createClient();
   const router = useRouter();
+  const { profile } = useUser();
 
   const handle_logout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -31,6 +35,7 @@ const page = () => {
 
   return (
     <>
+      <h2>{profile.nickname}</h2>
       <button onClick={handle_logout} className={styles.logout_btn}>
         <FontAwesomeIcon icon={faSignOut} size="xs" />
         Logout

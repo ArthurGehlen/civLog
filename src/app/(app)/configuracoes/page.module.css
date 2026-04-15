@@ -1,2 +1,12 @@
-.logout {
+.logout_btn {
+  background-color: transparent;
+  padding: 0.8rem 2rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  border: 1px solid #e05c5c;
+  transition: 0.4s ease all;
+}
+
+.logout_btn:hover {
+  background-color: #e05c5c;
 }
