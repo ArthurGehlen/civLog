@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
-const page = () => {
-  return (
-    <div></div>
-  )
-}
+const page = async ({ params }) => {
+  const user_id = await params;
 
-export default page
+  return <div>{user_id}</div>;
+};
+
+export default page;

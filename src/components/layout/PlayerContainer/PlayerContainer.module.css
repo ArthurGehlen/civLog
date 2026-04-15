@@ -1,0 +1,23 @@
+.player {
+  padding: 0.4rem 0.8rem;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 0.6rem;
+  border-radius: 0.2rem;
+  font-size: clamp(0.8rem, calc(0.6214vw + 0.2544rem), 1rem);
+}
+
+.divider {
+  height: 1.6rem;
+  width: 1px;
+  background-color: #999;
+}
+
+.player_civ {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+

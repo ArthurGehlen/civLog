@@ -3,7 +3,7 @@ import styles from "./GameCard.module.css";
 
 // Components
 import Link from "next/link";
-import Image from "next/image";
+import PlayerContainer from "../layout/PlayerContainer/PlayerContainer";
 
 const GameCard = ({ game_obj }) => {
   const date_formatter = new Intl.DateTimeFormat("pt-BR", {
@@ -16,14 +16,18 @@ const GameCard = ({ game_obj }) => {
 
   return (
     <div className={styles.game_card}>
+      {/* header */}
       <header className={styles.game_info}>
         <h2>{game_obj.name}</h2>
         <span
-          className={`${game_obj.is_completed} ? ${styles.completed} : ${styles.pending}`}
+          className={game_obj.is_completed ? styles.completed : styles.pending}
         >
-          {game_obj.is_completed ? "Concluída" : "Agendada"}
+          {game_obj.is_completed ? "Concluído" : "Agendada"}
         </span>
+        <span>{game_obj.organization}</span>
       </header>
+
+      {/* datas */}
       <div className={styles.game_dates}>
         <p>
           Data de início:{" "}
@@ -41,25 +45,26 @@ const GameCard = ({ game_obj }) => {
           </p>
         )}
       </div>
+
       <div className={styles.game_card_content}>
-        <p>
-          {winners.length > 1 ? "Vencedores" : "Vencedor"}:{" "}
-          {winners.map((p, i) => (
-            <span key={i}>
-              {p.profiles.nickname} — {p.civilizations?.name}
-            </span>
-          ))}
-        </p>
-        <p>
-          Jogadores:{" "}
-          {game_obj.game_players.map((p, i) => (
-            <span key={i}>
-              {p.profiles.nickname} ({p.civilizations?.name ?? "Sem civ"})
-            </span>
-          ))}
-        </p>
-        <p>{game_obj.organization}</p>
-        <Link href={`/partidas/${game_obj.id}`}>Ver Detalhes</Link>
+        {/* vencedores */}
+        <div className={styles.player_wrapper}>
+          {winners.length > 1 ? "Vencedores" : "Vencedor"}:
+          <PlayerContainer obj={winners} />
+        </div>
+
+        {/* containers dos jogadores */}
+        <div className={styles.player_wrapper}>
+          Jogadores: <PlayerContainer obj={game_obj.game_players} />
+        </div>
+
+        {/* link para mais detalhes */}
+        <Link
+          className={styles.link_to_details}
+          href={`/partidas/${game_obj.id}`}
+        >
+          Ver Detalhes
+        </Link>
       </div>
     </div>
   );
