@@ -10,7 +10,6 @@ import under_construction from "@/assets/under_construction.svg";
 
 // Components
 import Header from "@/components/layout/Header/Header";
-import Footer from "@/components/layout/Footer/Footer";
 import Image from "next/image";
 
 const layout = ({ children }) => {
@@ -28,7 +27,6 @@ const layout = ({ children }) => {
           <h2>Esta página está em desenvolvimento</h2>
           <p>Volte mais tarde para novidades :)</p>
         </main>
-        <Footer />
       </div>
     </UserProvider>
   );

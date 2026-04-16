@@ -23,8 +23,8 @@ const page = () => {
     const errors = {};
     if (!username || username.trim().length < 3)
       errors.username = "Nome de usuário deve ter pelo menos 3 caracteres.";
-    if (username && username.trim().length > 50)
-      errors.username = "Nome de usuário deve ter no máximo 50 caracteres.";
+    if (username && username.trim().length > 30)
+      errors.username = "Nome de usuário deve ter no máximo 30 caracteres.";
     if (!email) errors.email = "Email é obrigatório.";
     if (!password || password.length < 8)
       errors.password = "Senha deve ter pelo menos 8 caracteres.";
@@ -90,7 +90,7 @@ const page = () => {
             id="username"
             name="username"
             placeholder="Mínimo 3 caracteres"
-            maxLength={50}
+            maxLength={30}
           />
           {fieldErrors.username && (
             <span className={styles.field_error}>{fieldErrors.username}</span>

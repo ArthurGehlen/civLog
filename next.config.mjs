@@ -7,6 +7,9 @@ const nextConfig = {
       new URL(
         "https://mwycbxoshhdnbpeqneoo.supabase.co/storage/v1/object/public/civ-icons/**",
       ),
+      new URL(
+        "https://mwycbxoshhdnbpeqneoo.supabase.co/storage/v1/object/public/users-avatar/**",
+      ),
     ],
   },
 };

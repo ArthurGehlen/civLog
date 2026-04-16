@@ -54,3 +54,15 @@ ul {
   border-color: #e05c5c !important;
   color: #e05c5c !important;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1c1c20;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0a0a0c;
+}

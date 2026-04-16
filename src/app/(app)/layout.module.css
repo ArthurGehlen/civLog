@@ -1,7 +1,7 @@
 .main_content {
   padding: var(--global_component_padding);
   position: relative;
-  height: calc(100vh - 7rem - 5.5rem);
+  height: calc(100vh - 7rem);
   overflow-y: auto;
 }
 

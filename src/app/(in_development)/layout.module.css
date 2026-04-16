@@ -1,5 +1,5 @@
 .content {
-  height: calc(100vh - 7rem - 5.5rem);
+  height: calc(100vh - 7rem);
   display: flex;
   align-items: center;
   justify-content: center;

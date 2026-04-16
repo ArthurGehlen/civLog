@@ -35,9 +35,9 @@ const page = () => {
 
   return (
     <>
-      <h2>{profile.nickname}</h2>
+      <h2>{profile?.nickname}</h2>
       <button onClick={handle_logout} className={styles.logout_btn}>
-        <FontAwesomeIcon icon={faSignOut} size="xs" />
+        <FontAwesomeIcon icon={faSignOut} size="sm" />
         Logout
       </button>
     </>

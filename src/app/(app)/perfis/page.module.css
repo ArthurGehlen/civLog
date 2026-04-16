@@ -1,0 +1,19 @@
+.users_container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.user_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1c1c20;
+  padding: 1rem;
+}
+
+.user_info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}

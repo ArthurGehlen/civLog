@@ -15,7 +15,6 @@ import { useUser } from "@/_lib/context/UserContext";
 const Page = () => {
   const [lastMatches, setLastMatches] = useState([]);
   const supabase = createClient();
-  const { profile } = useUser();
 
   useEffect(() => {
     const load_last_matches = async () => {
@@ -59,7 +58,7 @@ const Page = () => {
       <div className={styles.last_matches_played_wrapper}>
         <h2>Últimas 3 partidas</h2>
         <hr style={{ margin: "2rem 0" }} />
-        <div className="last_matches_container">
+        <div className={styles.last_matches_container}>
           {lastMatches.map((match) => (
             <GameCard key={match.id} game_obj={match} />
           ))}
