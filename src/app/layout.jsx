@@ -3,6 +3,8 @@ import "@/_lib/fontawesome";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 
+// import "../bones/registry";
+
 // Components
 import { Toaster } from "sonner";
 

@@ -11,10 +11,12 @@ import GameCard from "@/components/matches/GameCard";
 
 // Context
 import { useUser } from "@/_lib/context/UserContext";
+import Loading from "@/components/layout/Loading/Loading";
 
 const Page = () => {
   const [lastMatches, setLastMatches] = useState([]);
   const supabase = createClient();
+  const { loading } = useUser();
 
   useEffect(() => {
     const load_last_matches = async () => {
@@ -55,6 +57,7 @@ const Page = () => {
 
   return (
     <>
+      {loading && <Loading />}
       <div className={styles.last_matches_played_wrapper}>
         <h2>Últimas 3 partidas</h2>
         <hr style={{ margin: "2rem 0" }} />
