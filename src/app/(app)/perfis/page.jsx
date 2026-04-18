@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 // Icons
 import { faUser } from "@fortawesome/free-regular-svg-icons";
@@ -18,10 +19,12 @@ const page = () => {
 
   useEffect(() => {
     const load_users = async () => {
-      const { data, error } = await supabase.from("profiles").select("*");
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("id, avatar_url, nickname");
       setUsers(data);
 
-      if (error) throw new Error(error);
+      if (error) toast.error("Erro ao carregar dados. Tente novamente");
     };
     load_users();
   }, []);

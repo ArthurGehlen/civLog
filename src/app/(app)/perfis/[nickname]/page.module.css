@@ -1,0 +1,14 @@
+.main_user_info {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.user_avatar {
+  max-width: 10rem;
+  height: 10rem;
+  flex: 1 1 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

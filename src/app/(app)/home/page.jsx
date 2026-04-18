@@ -38,7 +38,7 @@ const Page = () => {
             profiles ( nickname, avatar_url ),
             civilizations ( name, icon_url )
           )`,
-        )
+        ) // nome_da_tabela (valores) 
         .order("created_at", { ascending: false })
         .limit(3);
       if (error) {
