@@ -48,7 +48,12 @@ const page = () => {
               )}
               <span>{user.nickname}</span>
             </div>
-            <Link href={`/perfis/${user.nickname}`}>Ver Perfil</Link>
+            <Link
+              className={styles.more_details_link}
+              href={`/perfis/${user.nickname}`}
+            >
+              Ver Perfil
+            </Link>
           </div>
         ))}
       </div>

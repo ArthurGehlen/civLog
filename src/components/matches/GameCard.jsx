@@ -7,9 +7,10 @@ import PlayerContainer from "../layout/PlayerContainer/PlayerContainer";
 
 const GameCard = ({ game_obj }) => {
   const date_formatter = new Intl.DateTimeFormat("pt-BR", {
-    day: "numeric",
-    month: "numeric",
+    day: "2-digit",
+    month: "2-digit",
     year: "numeric",
+    timeZone: "UTC",
   });
 
   const winners = game_obj.game_players.filter((p) => p.is_winner);

@@ -17,3 +17,27 @@
   align-items: center;
   gap: 0.6rem;
 }
+
+.more_details_link {
+  position: relative;
+  transition: 0.4s ease color;
+}
+
+.more_details_link:hover {
+  color: #c9a84c;
+}
+
+.more_details_link:hover::after {
+  width: 100% !important;
+}
+
+.more_details_link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 0%;
+  background-color: #c9a84c;
+  transition: 0.4s ease width;
+}

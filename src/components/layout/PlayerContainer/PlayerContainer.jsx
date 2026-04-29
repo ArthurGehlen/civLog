@@ -19,7 +19,10 @@ const PlayerContainer = ({ obj }) => {
             backgroundColor: CIV_COLORS[p.civilizations.name] ?? "#2a2a2a",
           }}
         >
-          <Link className={styles.nickname} href={`/perfis/${p.profiles.nickname}`}>
+          <Link
+            className={styles.nickname}
+            href={`/perfis/${p.profiles.nickname}`}
+          >
             {p.profiles.nickname}
           </Link>
 
