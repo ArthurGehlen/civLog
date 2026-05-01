@@ -63,6 +63,9 @@
   font-size: 0.95rem;
   transition: 0.4s ease all;
   margin-right: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
 }
 
 .config_link_btn:hover {
@@ -92,6 +95,10 @@
 
 .menu li:not(:first-child) {
   margin-top: 0.4rem;
+}
+
+.user_avatar {
+  border-radius: 50%;
 }
 
 @media screen and (max-width: 709px) {

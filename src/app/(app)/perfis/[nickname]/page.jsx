@@ -23,6 +23,18 @@ const page = () => {
   const [userData, setUserData] = useState([]);
   const [playedCivilizations, setPlayedCivilizations] = useState([]);
   const [playedGames, setPlayedGames] = useState([]);
+  const [gamesCount, setGamesCount] = useState({
+    Total: 0,
+    Venceu: 0,
+    Perdeu: 0,
+    Porcentagem: 0,
+  });
+  const games_count_label = {
+    Total: "Total de Partidas Jogadas",
+    Venceu: "Total de Vitórias",
+    Perdeu: "Total de Derrotas",
+    Porcentagem: "% de Vitórias",
+  };
   const [favoriteCiv, setFavoriteCiv] = useState(null);
   const supabase = createClient();
   const params = useParams();
@@ -63,6 +75,20 @@ const page = () => {
           civ_count[civ.name] > civ_count[most.name] ? civ : most,
         );
 
+        const total_winner = data.game_players.filter(
+          (g) => g.is_winner,
+        ).length;
+        const total_loser = data.game_players.filter(
+          (g) => !g.is_winner,
+        ).length;
+        const percentage_of_winning = `${(data.game_players.length / total_winner) * 100}%`;
+
+        setGamesCount({
+          Total: data.game_players.length,
+          Venceu: total_winner,
+          Perdeu: total_loser,
+          Porcentagem: percentage_of_winning,
+        });
         setPlayedCivilizations(civs);
         setPlayedGames(played_games);
         setFavoriteCiv(favorite_civ);
@@ -75,6 +101,8 @@ const page = () => {
   }, []);
 
   // NÃO DEIXAR CONSOLE.LOG() NO CÓDIGO :)
+
+  // IDEIAS: eventualmente colocar um sistema de patente?
 
   return (
     <>
@@ -163,6 +191,20 @@ const page = () => {
                 <p>{favoriteCiv.name}</p>
               </div>
             )}
+          </div>
+
+          <div
+            className={styles.stat_container}
+            style={{
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
+            {Object.keys(gamesCount).map((key, index) => (
+              <p key={index}>
+                {games_count_label[key]}: <b>{gamesCount[key]}</b>
+              </p>
+            ))}
           </div>
         </div>
 

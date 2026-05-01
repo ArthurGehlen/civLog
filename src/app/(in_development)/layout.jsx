@@ -23,6 +23,7 @@ const layout = ({ children }) => {
             alt="Under Construction"
             height={200}
             width={450}
+            loading="lazy"
           />
           <h2>Esta página está em desenvolvimento</h2>
           <p>Volte mais tarde para novidades :)</p>

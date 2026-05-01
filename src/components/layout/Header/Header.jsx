@@ -12,6 +12,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 // Components
 import Logo from "../Logo/Logo";
 import Link from "next/link";
+import Image from "next/image";
 
 // Icons
 import { faUser } from "@fortawesome/free-regular-svg-icons";
@@ -66,7 +67,18 @@ const Header = () => {
         <div className={styles.user_menu_wrapper}>
           <div className={styles.upper_menu}>
             <Link className={styles.config_link_btn} href="/configuracoes">
-              <FontAwesomeIcon style={{ flexShrink: 0 }} icon={faUser} />
+              {profile?.avatar_url ? (
+                <Image
+                  src={profile.avatar_url}
+                  width={25}
+                  height={25}
+                  className={styles.user_avatar}
+                  alt="User Icon"
+                  loading="lazy"
+                />
+              ) : (
+                <FontAwesomeIcon style={{ flexShrink: 0 }} icon={faUser} />
+              )}
               <span className={styles.nickname_displayer}>
                 {is_mobile
                   ? format_nickname(profile?.nickname)
