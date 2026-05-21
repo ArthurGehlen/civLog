@@ -56,8 +56,17 @@ export const UserProvider = ({ children }) => {
     };
   }, [supabase]);
 
+  // função pra atualizar o pefil do usuário sem precisar atualizar a página
+  const refresh_profile = async () => {
+    const { data } = await supabase
+      .from("profiles")
+      .select("nickname", "avatar_url", "is_admin")
+      .eq("auth_user_id", user.id);
+    setProfile(data);
+  };
+
   return (
-    <UserContext.Provider value={{ user, profile, loading }}>
+    <UserContext.Provider value={{ user, profile, loading, refresh_profile }}>
       {children}
     </UserContext.Provider>
   );

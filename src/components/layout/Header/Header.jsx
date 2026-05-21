@@ -62,6 +62,11 @@ const Header = () => {
               </Link>
             </li>
           ))}
+          {profile?.is_admin && (
+            <li>
+              <Link href="/admin">Sistema</Link>
+            </li>
+          )}
         </ul>
 
         <div className={styles.user_menu_wrapper}>

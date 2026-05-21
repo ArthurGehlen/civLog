@@ -57,7 +57,7 @@ const page = () => {
 
     setLoading(true);
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: { data: { username }, captchaToken },
@@ -71,8 +71,7 @@ const page = () => {
       return;
     }
 
-    toast.success("Conta criada com sucesso!");
-    router.push("/home");
+    toast.success("Conta criada! Verifique seu email para confirmar.");
   };
 
   return (

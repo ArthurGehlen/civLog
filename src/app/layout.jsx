@@ -20,7 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${poppins.variable}`}>
-      <body>
+      <body suppressHydrationWarning>
         {children}
         <Toaster
           position="top-center"

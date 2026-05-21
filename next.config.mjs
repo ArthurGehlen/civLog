@@ -10,6 +10,11 @@ const nextConfig = {
       new URL(
         "https://mwycbxoshhdnbpeqneoo.supabase.co/storage/v1/object/public/users-avatar/**",
       ),
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/drjptqvzc/image/upload/**",
+      },
     ],
   },
 };

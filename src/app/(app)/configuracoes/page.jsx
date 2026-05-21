@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Hooks
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 // Icons
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
@@ -14,12 +15,14 @@ import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "@/_lib/context/UserContext";
 
 // Components
+import AvatarUpload from "@/components/layout/AvatarUpload/AvatarUpload";
 import { toast } from "sonner";
 
 const page = () => {
   const supabase = createClient();
   const router = useRouter();
-  const { profile } = useUser();
+  const { profile, user, refresh_profile } = useUser();
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const handle_logout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -33,13 +36,115 @@ const page = () => {
     router.push("/login");
   };
 
+  const validate_steam_link = (url) => {
+    if (typeof url != "string") toast.error("A URL Steam deve ser um texto!");
+    const trimmed = url.trim();
+    if (trimmed === "") return false;
+
+    const default_steam_url = "https://steamcommunity.com/profiles/"; // toda url steam deve começar assim e prosseguir com o id steam
+
+    // ctz q vai ter uns engraçadinho :)
+
+    return trimmed.includes(default_steam_url);
+  };
+
+  const validate = ({ username, steam_url }) => {
+    const errors = {};
+    if (!username || username.trim().length < 3)
+      errors.new_username = "Nome de usuário deve ter pelo menos 3 caracteres.";
+    if (username && username.trim().length > 30)
+      errors.new_username = "Nome de usuário deve ter no máximo 30 caracteres.";
+    if (steam_url && !validate_steam_link(steam_url)) {
+      errors.steam_url = "URL steam inválida!";
+    }
+    return errors;
+  };
+
+  const handle_submit = async (e) => {
+    e.preventDefault();
+
+    setFieldErrors({});
+
+    const form_data = new FormData(e.currentTarget);
+    const new_username = form_data.get("new_username");
+    const new_steam_url = form_data.get("new_steam_url");
+
+    const errors = validate({
+      username: new_username,
+      steam_url: new_steam_url,
+    });
+
+    if (Object.keys(errors).length > 0) {
+      console.log(form_data);
+      setFieldErrors(errors);
+      console.log(fieldErrors);
+
+      return;
+    }
+
+    if (new_username) {
+      const { error } = await supabase
+        .from("profiles")
+        .update({ nickname: new_username })
+        .eq("auth_user_id", user.id);
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      toast.success("Nome de usuário atualizado!");
+      refresh_profile();
+    }
+  };
+
   return (
     <>
-      <h2>{profile?.nickname}</h2>
-      <button onClick={handle_logout} className={styles.logout_btn}>
-        <FontAwesomeIcon icon={faSignOut} size="sm" />
-        Logout
-      </button>
+      <header className={styles.config_header}>
+        <h2>{profile?.nickname}</h2>
+        <button onClick={handle_logout} className={styles.logout_btn}>
+          <FontAwesomeIcon icon={faSignOut} size="sm" />
+          Logout
+        </button>
+      </header>
+
+      <h2 style={{ marginTop: "2rem" }}>Personalizar Perfil</h2>
+
+      <hr style={{ margin: "2rem 0" }} />
+
+      <form onSubmit={handle_submit} className={styles.custom_profile}>
+        <div className={styles.custom_profile_container}>
+          <AvatarUpload userId={user?.id} currentAvatar={profile?.avatar_url} />
+        </div>
+
+        <div className={styles.input_wrapper}>
+          <label htmlFor="new_username">Trocar nome de usuário:</label>
+          <input
+            type="text"
+            id="new_username"
+            name="new_username"
+            className={styles.custom_profile_container_input}
+            placeholder="Máximo de 30 caracteres"
+            maxLength={30}
+          />
+        </div>
+
+        <div className={styles.input_wrapper}>
+          <label htmlFor="new_steam_url">URL da steam:</label>
+          <input
+            type="text"
+            id="new_steam_url"
+            name="new_steam_url"
+            className={styles.custom_profile_container_input}
+            placeholder="Adicione a sua URL da steam"
+            maxLength={70}
+          />
+        </div>
+
+        <button className={styles.submit_btn} type="submit">
+          Atualizar
+        </button>
+      </form>
     </>
   );
 };
