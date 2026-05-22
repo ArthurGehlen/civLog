@@ -14,7 +14,6 @@ import { toast } from "sonner";
 
 const page = () => {
   const supabase = createClient();
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
   const [captchaToken, setCaptchaToken] = useState(null);
@@ -44,15 +43,10 @@ const page = () => {
     setFieldErrors({});
 
     const form = new FormData(e.currentTarget);
-    const username = form.get("username");
-    const email = form.get("email");
-    const password = form.get("password");
-    const confirmPassword = form.get("confirmPassword");
-
-    username = username.trim();
-    email = email.trim();
-    password = password.trim();
-    confirmPassword = confirmPassword.trim();
+    const username = form.get("username").trim();
+    const email = form.get("email").trim();
+    const password = form.get("password").trim();
+    const confirmPassword = form.get("confirmPassword").trim();
 
     const errors = validate({ username, email, password, confirmPassword });
     if (Object.keys(errors).length > 0) {
