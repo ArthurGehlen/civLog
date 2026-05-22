@@ -30,7 +30,7 @@ export const UserProvider = ({ children }) => {
 
       const { data } = await supabase
         .from("profiles")
-        .select("nickname, avatar_url, is_admin")
+        .select("id, nickname, avatar_url, is_admin")
         .eq("auth_user_id", user.id)
         .single();
 
@@ -62,7 +62,7 @@ export const UserProvider = ({ children }) => {
       .from("profiles")
       .select("nickname", "avatar_url", "is_admin")
       .eq("auth_user_id", user.id);
-    setProfile(data);
+    setProfile(data);w
   };
 
   return (

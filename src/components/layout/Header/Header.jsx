@@ -64,7 +64,7 @@ const Header = () => {
           ))}
           {profile?.is_admin && (
             <li>
-              <Link href="/admin">Sistema</Link>
+              <Link href="/admin">Admin</Link>
             </li>
           )}
         </ul>
@@ -111,6 +111,11 @@ const Header = () => {
                     </Link>
                   </li>
                 ))}
+                {profile?.is_admin && (
+                  <li>
+                    <Link href="/admin">Admin</Link>
+                  </li>
+                )}
               </ul>
             </div>
           )}

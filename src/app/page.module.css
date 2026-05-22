@@ -12,14 +12,18 @@
 }
 
 .link_to_login {
-  background-color: transparent;
-  padding: 0.8rem 2rem;
+  padding: 0.8rem 2.5rem;
   border-radius: 2rem;
-  cursor: pointer;
   border: 1px solid #c9a84c;
+  background-color: transparent;
+  color: #e8e8e8;
+  font-size: 0.95rem;
   transition: 0.4s ease all;
+  margin-right: 0.6rem;
+  gap: 0.2rem;
+  text-align: center;
 }
 
 .link_to_login:hover {
-  background-color: #c9a84c;
+  box-shadow: inset 0 -4rem 0 0 #3d3010;
 }

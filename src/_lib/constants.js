@@ -21,11 +21,12 @@ export const CIV_COLORS = {
 };
 
 // apenas estes jogadores irão poder escolher civs em jogos agendados
-const MAIN_PLAYERS_ID = [
-  "86776711-27fa-4192-b0d2-808233b6b383", // Arthur
-  "0a7e5e92-55e4-4e8c-af2d-5c6896277ced", // Lucas
-  "23745a6b-d027-429d-9691-4533167d738b", // Lorenzo
-  "2e6c389b-02d3-403d-acfa-a56bb09c39ca", // Samuel
-  "36e6c10c-69f0-4bc7-9e9c-4c63654a503d", // Marcelo
-  "dec54716-6e22-470f-b7eb-7944f414761e", // Mateus
+export const MAIN_PLAYERS_ID = [
+  "80e4931f-22a1-4cf7-9208-88246a99b0e9", // Arthur
+  "227d0403-81a3-4ca9-9514-817e99ae2c85", // Lucas
+  "a0309c3c-0784-47f4-a824-f630b89c4c99", // Lorenzo
+  "f9f8e64e-838c-44d0-9027-3c916d173050", // Samuel
+  "c4ace353-b87c-41b6-a0b9-500c00416448", // Marcelo
+  "8a80ff2b-cea7-4eb8-b475-c56533f6a1dd", // Mateus
+  "96523227-2a0e-4b66-9734-c188bfdde110", // Rian
 ];

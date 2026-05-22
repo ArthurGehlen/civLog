@@ -49,6 +49,11 @@ const page = () => {
     const password = form.get("password");
     const confirmPassword = form.get("confirmPassword");
 
+    username = username.trim();
+    email = email.trim();
+    password = password.trim();
+    confirmPassword = confirmPassword.trim();
+
     const errors = validate({ username, email, password, confirmPassword });
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
@@ -57,7 +62,7 @@ const page = () => {
 
     setLoading(true);
 
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
       options: { data: { username }, captchaToken },

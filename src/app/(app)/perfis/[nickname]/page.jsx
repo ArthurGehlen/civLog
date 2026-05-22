@@ -81,7 +81,7 @@ const page = () => {
         const total_loser = data.game_players.filter(
           (g) => !g.is_winner,
         ).length;
-        const percentage_of_winning = `${(data.game_players.length / total_winner) * 100}%`;
+        const percentage_of_winning = `${total_winner == 0 ? 0 : (data.game_players.length / total_winner) * 100}%`;
 
         setGamesCount({
           Total: data.game_players.length,

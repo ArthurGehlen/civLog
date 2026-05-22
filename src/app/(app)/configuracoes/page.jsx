@@ -74,10 +74,19 @@ const page = () => {
       steam_url: new_steam_url,
     });
 
+    // se tiver erro nos inputs
     if (Object.keys(errors).length > 0) {
-      console.log(form_data);
       setFieldErrors(errors);
-      console.log(fieldErrors);
+
+      if (errors.new_username) {
+        toast.error(errors.new_username);
+        return;
+      }
+
+      if (errors.steam_url) {
+        toast.error(errors.steam_url);
+        return;
+      }
 
       return;
     }
@@ -88,12 +97,21 @@ const page = () => {
         .update({ nickname: new_username })
         .eq("auth_user_id", user.id);
 
-      if (error) {
-        toast.error(error.message);
-        return;
-      }
+      if (error) toast.error(error.message); // se tiver erro no supabase
 
-      toast.success("Nome de usuário atualizado!");
+      toast.success("Nome de usuário atualizado com sucesso!");
+      refresh_profile();
+    }
+
+    if (new_steam_url) {
+      const { error } = await supabase
+        .from("profiles")
+        .update({ steam_url: new_steam_url })
+        .eq("auth_user_id", user.id);
+
+      if (error) toast.error(error.message);
+
+      toast.success("URL da steam atualizada com sucesso!");
       refresh_profile();
     }
   };
