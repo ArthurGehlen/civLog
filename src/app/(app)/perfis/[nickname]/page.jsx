@@ -48,7 +48,7 @@ const page = () => {
         .select(
           `id, nickname, avatar_url, steam_url, 
           game_players
-           (is_winner, games (name), civilizations (name, icon_url))`,
+           (is_winner, games (name, is_completed), civilizations (name, icon_url))`,
         )
         .eq("nickname", nickname)
         .maybeSingle();
@@ -59,19 +59,14 @@ const page = () => {
           .map((civ_obj) => civ_obj.civilizations)
           .filter(Boolean);
 
-        const played_games = data.game_players.map((civ_obj) => ({
-          ...civ_obj.games,
-          is_winner: civ_obj.is_winner,
-        }));
-
         // conta quantos jogos o usuário jogou com aquela civilização
-        const civ_count = civs.reduce((acc, civ) => {
+        const civ_count = civs?.reduce((acc, civ) => {
           acc[civ.name] = (acc[civ.name] || 0) + 1; // sim isso é uma obra de arte :)
           return acc;
         }, {});
 
         // retorna a civilização que o usuário mais jogou
-        const favorite_civ = civs.reduce((most, civ) =>
+        const favorite_civ = civs?.reduce((most, civ) =>
           civ_count[civ.name] > civ_count[most.name] ? civ : most,
         );
 
@@ -81,16 +76,22 @@ const page = () => {
         const total_loser = data.game_players.filter(
           (g) => !g.is_winner,
         ).length;
-        const percentage_of_winning = `${total_winner == 0 ? 0 : (data.game_players.length / total_winner) * 100}%`;
+        // estava contando jogos agendados também e isso filtra para contar apenas jogos concluídos
+        const total_games = data.game_players.filter(
+          (g) => g.games.is_completed,
+        );
+        const percentage_of_winning = `${
+          total_winner == 0 ? 0 : (total_winner / total_games.length) * 100
+        }%`;
 
         setGamesCount({
-          Total: data.game_players.length,
+          Total: total_games.length,
           Venceu: total_winner,
           Perdeu: total_loser,
           Porcentagem: percentage_of_winning,
         });
         setPlayedCivilizations(civs);
-        setPlayedGames(played_games);
+        setPlayedGames(total_games);
         setFavoriteCiv(favorite_civ);
       }
 

@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Hooks
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 // Icons
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";

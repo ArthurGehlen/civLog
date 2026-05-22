@@ -75,8 +75,8 @@ const Header = () => {
               {profile?.avatar_url ? (
                 <Image
                   src={profile.avatar_url}
-                  width={25}
-                  height={25}
+                  width={35}
+                  height={35}
                   className={styles.user_avatar}
                   alt="User Icon"
                   loading="lazy"

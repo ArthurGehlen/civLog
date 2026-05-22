@@ -69,6 +69,7 @@ const GameCard = ({ game_obj }) => {
     }
 
     toast.success("Você entrou no jogo!");
+    window.location.reload();
   };
 
   return (
@@ -118,7 +119,10 @@ const GameCard = ({ game_obj }) => {
 
         {!game_obj?.is_completed && alreadyJoined && (
           <div className={styles.civ_picker_container}>
-            <CivPicker />
+            <CivPicker
+              game_players={game_obj.game_players}
+              game_id={game_obj.id}
+            />
           </div>
         )}
 
