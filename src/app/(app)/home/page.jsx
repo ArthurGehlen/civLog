@@ -63,7 +63,7 @@ const Page = () => {
         <hr style={{ margin: "2rem 0" }} />
         <div className={styles.last_matches_container}>
           {lastMatches.map((match) => (
-            <GameCard key={match.id} game_obj={match} />
+            <GameCard key={match?.id} game_obj={match} />
           ))}
         </div>
       </div>

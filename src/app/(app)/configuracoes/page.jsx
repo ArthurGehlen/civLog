@@ -22,7 +22,6 @@ const page = () => {
   const supabase = createClient();
   const router = useRouter();
   const { profile, user, refresh_profile } = useUser();
-  const [fieldErrors, setFieldErrors] = useState({});
 
   const handle_logout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -63,8 +62,6 @@ const page = () => {
   const handle_submit = async (e) => {
     e.preventDefault();
 
-    setFieldErrors({});
-
     const form_data = new FormData(e.currentTarget);
     const new_username = form_data.get("new_username");
     const new_steam_url = form_data.get("new_steam_url");
@@ -76,8 +73,6 @@ const page = () => {
 
     // se tiver erro nos inputs
     if (Object.keys(errors).length > 0) {
-      setFieldErrors(errors);
-
       if (errors.new_username) {
         toast.error(errors.new_username);
         return;

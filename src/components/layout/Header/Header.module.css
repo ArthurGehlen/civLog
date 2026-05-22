@@ -18,12 +18,12 @@
 }
 
 .header_links li {
-  color: #3d3010;
-  transition: 0.4s ease color;
+  color: #c9a84c;
+  position: relative;
 }
 
-.header_links li:hover {
-  color: #c9a84c;
+.header_links li:hover::before {
+  width: 100%;
 }
 
 .header_links li:not(:first-child) {
@@ -35,14 +35,23 @@
   color: #c9a84c;
 }
 
+.header_links li::before {
+  width: 0;
+}
+
+.active::before {
+  width: 100%;
+}
+
+.header_links li::before,
 .active::before {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
   height: 1px;
   background-color: #c9a84c;
+  transition: .4s ease width;
 }
 
 .header_info_wrapper {

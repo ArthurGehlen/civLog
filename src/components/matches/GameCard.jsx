@@ -13,6 +13,7 @@ import Link from "next/link";
 import Loading from "../layout/Loading/Loading";
 import PlayerContainer from "../layout/PlayerContainer/PlayerContainer";
 import { toast } from "sonner";
+import CivPicker from "../civilizations/CivPicker";
 
 const GameCard = ({ game_obj }) => {
   const { user, profile } = useUser();
@@ -30,7 +31,7 @@ const GameCard = ({ game_obj }) => {
     const { data, error } = await supabase
       .from("game_players")
       .select("game_id")
-      .eq("profile_id", profile.id)
+      .eq("profile_id", profile?.id)
       .eq("game_id", game_id)
       .single();
 
@@ -115,6 +116,13 @@ const GameCard = ({ game_obj }) => {
           Jogadores: <PlayerContainer obj={game_obj?.game_players} />
         </div>
 
+        {!game_obj?.is_completed && alreadyJoined && (
+          <div className={styles.civ_picker_container}>
+            <CivPicker />
+          </div>
+        )}
+
+        {/* container para mais opções */}
         <div className={styles.game_options}>
           {/* link para mais detalhes */}
           <Link
@@ -123,7 +131,6 @@ const GameCard = ({ game_obj }) => {
           >
             Ver Detalhes
           </Link>
-
           {/* botão pra ingressar no jogo */}
           {!game_obj?.is_completed &&
             MAIN_PLAYERS_ID.includes(user?.id) &&
