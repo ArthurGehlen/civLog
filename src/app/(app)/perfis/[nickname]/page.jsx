@@ -20,7 +20,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const page = () => {
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState(null);
   const [playedCivilizations, setPlayedCivilizations] = useState([]);
   const [playedGames, setPlayedGames] = useState([]);
   const [gamesCount, setGamesCount] = useState({
@@ -57,7 +57,11 @@ const page = () => {
       if (data?.game_players) {
         const civs = data.game_players
           .map((civ_obj) => civ_obj.civilizations)
-          .filter(Boolean);
+          .filter(Boolean)
+          .filter(
+            (civ, index, self) =>
+              index === self.findIndex((c) => c.name === civ.name),
+          );
 
         // conta quantos jogos o usuário jogou com aquela civilização
         const civ_count = civs?.reduce((acc, civ) => {
@@ -66,15 +70,18 @@ const page = () => {
         }, {});
 
         // retorna a civilização que o usuário mais jogou
-        const favorite_civ = civs?.reduce((most, civ) =>
-          civ_count[civ.name] > civ_count[most.name] ? civ : most,
-        );
+        const favorite_civ =
+          civs.length > 0
+            ? civs.reduce((most, civ) =>
+                civ_count[civ.name] > civ_count[most.name] ? civ : most,
+              )
+            : null;
 
         const total_winner = data.game_players.filter(
           (g) => g.is_winner,
         ).length;
         const total_loser = data.game_players.filter(
-          (g) => !g.is_winner,
+          (g) => g.games.is_completed && !g.is_winner,
         ).length;
         // estava contando jogos agendados também e isso filtra para contar apenas jogos concluídos
         const total_games = data.game_players.filter(
@@ -99,7 +106,7 @@ const page = () => {
     };
 
     get_user_data();
-  }, []);
+  }, [nickname]);
 
   // NÃO DEIXAR CONSOLE.LOG() NO CÓDIGO :)
 
@@ -211,9 +218,9 @@ const page = () => {
 
         <div className={styles.column}>
           <h3 className={styles.column_title}>Partidas Jogadas</h3>
-          {playedGames.map((game) => (
-            <div className={styles.played_game_container} key={game.name}>
-              <h3>{game.name}</h3>
+          {playedGames.map((game, index) => (
+            <div className={styles.played_game_container} key={index}>
+              <h3>{game.games.name}</h3>
               {game.is_winner ? (
                 <span className={styles.winner}>Venceu</span>
               ) : (
