@@ -24,8 +24,8 @@ export const CIV_COLORS = {
 export const MAIN_PLAYERS_ID = [
   "80e4931f-22a1-4cf7-9208-88246a99b0e9", // Arthur
   "227d0403-81a3-4ca9-9514-817e99ae2c85", // Lucas
-  "a0309c3c-0784-47f4-a824-f630b89c4c99", // Lorenzo
-  "f9f8e64e-838c-44d0-9027-3c916d173050", // Samuel
+  "dab70759-72a6-47ca-81aa-81798fe31fee", // Lorenzo
+  "84193a92-70f2-44f1-9999-6aa259edc275", // Samuel
   "c4ace353-b87c-41b6-a0b9-500c00416448", // Marcelo
   "8a80ff2b-cea7-4eb8-b475-c56533f6a1dd", // Mateus
   "96523227-2a0e-4b66-9734-c188bfdde110", // Rian
