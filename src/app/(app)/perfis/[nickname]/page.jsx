@@ -88,7 +88,9 @@ const page = () => {
           (g) => g.games.is_completed,
         );
         const percentage_of_winning = `${
-          total_winner == 0 ? 0 : (total_winner / total_games.length) * 100
+          total_winner == 0
+            ? 0
+            : ((total_winner / total_games.length) * 100).toFixed(2)
         }%`;
 
         setGamesCount({
