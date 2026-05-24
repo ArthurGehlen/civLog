@@ -1,7 +1,16 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 
+// NÃO DEIXAR CONSOLE.LOG NO CÓDIGO :)
+
 export default async function proxy(request) {
+  const pathname = request.nextUrl.pathname;
+  const code = request.nextUrl.searchParams.get("code");
+
+  if (pathname.startsWith("/update-password") && code) {
+    return NextResponse.next();
+  }
+
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -28,14 +37,21 @@ export default async function proxy(request) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const pathname = request.nextUrl.pathname;
 
   if (
     user &&
-    (pathname.startsWith("/login") || pathname.startsWith("/signup"))
+    (pathname.startsWith("/login") ||
+      pathname.startsWith("/signup") ||
+      pathname.startsWith("/forgot-password"))
   ) {
     const url = request.nextUrl.clone();
     url.pathname = "/home";
+    return NextResponse.redirect(url);
+  }
+
+  if (!user && pathname.startsWith("/update-password")) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/forgot-password";
     return NextResponse.redirect(url);
   }
 
@@ -43,6 +59,8 @@ export default async function proxy(request) {
     !user &&
     !pathname.startsWith("/login") &&
     !pathname.startsWith("/signup") &&
+    !pathname.startsWith("/forgot-password") &&
+    !pathname.startsWith("/update-password") &&
     !pathname.startsWith("/auth")
   ) {
     const url = request.nextUrl.clone();
@@ -71,6 +89,9 @@ export const config = {
   matcher: [
     "/login",
     "/signup",
+    "/forgot-password",
+    "/update-password",
+    "/auth/:path*",
     "/home",
     "/leaderboard",
     "/configuracoes",

@@ -2,21 +2,26 @@
 // Utils
 import styles from "../layout.module.css";
 import { createClient } from "@/_lib/supabase/client";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Hooks
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 // Components
 import Link from "next/link";
 import Captcha from "@/components/captcha/Captcha";
 import { toast } from "sonner";
 
+// Images
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
 const page = () => {
   const supabase = createClient();
   const [loading, setLoading] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
   const [captchaToken, setCaptchaToken] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const validate = ({ username, email, password, confirmPassword }) => {
     const errors = {};
@@ -115,13 +120,22 @@ const page = () => {
           <label className={styles.input_label} htmlFor="password">
             Senha
           </label>
-          <input
-            className={`${styles.input_container} ${fieldErrors.password ? styles.input_invalid : ""}`}
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Mínimo 8 caracteres"
-          />
+          <div className={styles.input_password_wrapper}>
+            <input
+              className={`${styles.input_container} ${fieldErrors.password ? styles.input_invalid : ""}`}
+              type={showPassword ? "text" : "password"}
+              name="password"
+              id="password"
+              placeholder="Mínimo 8 caracteres"
+            />
+            <button
+              type="button"
+              className={styles.password_toggle}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+            </button>
+          </div>
           {fieldErrors.password && (
             <span className={styles.field_error}>{fieldErrors.password}</span>
           )}
@@ -131,12 +145,23 @@ const page = () => {
           <label className={styles.input_label} htmlFor="confirmPassword">
             Confirme sua senha
           </label>
-          <input
-            className={`${styles.input_container} ${fieldErrors.confirmPassword ? styles.input_invalid : ""}`}
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-          />
+          <div className={styles.input_password_wrapper}>
+            <input
+              className={`${styles.input_container} ${fieldErrors.confirmPassword ? styles.input_invalid : ""}`}
+              type={showConfirmPassword ? "text" : "password"}
+              name="confirmPassword"
+              id="confirmPassword"
+            />
+            <button
+              type="button"
+              className={styles.password_toggle}
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              <FontAwesomeIcon
+                icon={showConfirmPassword ? faEyeSlash : faEye}
+              />
+            </button>
+          </div>
           {fieldErrors.confirmPassword && (
             <span className={styles.field_error}>
               {fieldErrors.confirmPassword}

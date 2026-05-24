@@ -2,6 +2,7 @@
 // Utils
 import styles from "../layout.module.css";
 import { createClient } from "@/_lib/supabase/client";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Hooks
 import { useState } from "react";
@@ -12,6 +13,9 @@ import Link from "next/link";
 import Captcha from "@/components/captcha/Captcha";
 import { toast } from "sonner";
 
+// Images
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
 const page = () => {
   const supabase = createClient();
   const router = useRouter();
@@ -19,6 +23,7 @@ const page = () => {
   const [loading, setLoading] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
   const [captchaToken, setCaptchaToken] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const validate = ({ email, password }) => {
     const errors = {};
@@ -90,13 +95,25 @@ const page = () => {
           <label className={styles.input_label} htmlFor="password">
             Senha
           </label>
-          <input
-            className={`${styles.input_container} ${fieldErrors.password ? styles.input_invalid : ""}`}
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Digite sua senha"
-          />
+          <div className={styles.input_password_wrapper}>
+            <input
+              className={`${styles.input_container} ${fieldErrors.password ? styles.input_invalid : ""}`}
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              placeholder="Digite sua senha"
+            />
+            <button
+              type="button"
+              className={styles.password_toggle}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+            </button>
+          </div>
+          <Link className={styles.forgot_password} href="/forgot-password">
+            Esqueci minha senha
+          </Link>
           {fieldErrors.password && (
             <span className={styles.field_error}>{fieldErrors.password}</span>
           )}

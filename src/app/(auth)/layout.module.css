@@ -35,6 +35,34 @@
   gap: 0.4rem;
 }
 
+.input_password_wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input_password_wrapper .input_container {
+  width: 100%;
+  padding-right: 2.8rem;
+}
+
+.password_toggle {
+  position: absolute;
+  right: 0.8rem;
+  background: transparent;
+  border: none;
+  color: #c9a84c;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.password_toggle:hover {
+  color: #e8e8e8;
+}
+
 .input_container,
 .submit_btn {
   padding: 0.8rem;
@@ -73,6 +101,17 @@
 }
 
 .link_to:hover {
+  text-decoration: underline;
+}
+
+.forgot_password {
+  width: 100%;
+  text-align: start;
+  font-size: 0.8rem;
+  color: #c9a84c;
+}
+
+.forgot_password:hover {
   text-decoration: underline;
 }
 
