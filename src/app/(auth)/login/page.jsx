@@ -61,7 +61,11 @@ const page = () => {
     });
 
     if (error) {
-      toast.error("Email ou senha incorretos.");
+      if (error.message.includes("Email not confirmed")) {
+        toast.error("Confirme seu email antes de entrar.");
+      } else {
+        toast.error("Email ou senha incorretos.");
+      }
       setLoading(false);
       return;
     }

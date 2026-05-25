@@ -3,6 +3,7 @@
 import styles from "./page.module.css";
 import { createClient } from "@/_lib/supabase/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import format_nickname from "@/_lib/formatNickname";
 
 // Hooks
 import { useRouter } from "next/navigation";
@@ -91,7 +92,7 @@ const page = () => {
         .update({ nickname: new_username })
         .eq("auth_user_id", user.id);
 
-      if (error) toast.error(error.message); // se tiver erro no supabase
+      if (error) toast.error(error.message);
 
       toast.success("Nome de usuário atualizado com sucesso!");
       refresh_profile();
@@ -113,7 +114,7 @@ const page = () => {
   return (
     <>
       <header className={styles.config_header}>
-        <h2>{profile?.nickname}</h2>
+        <h2>{format_nickname(profile?.nickname, 15)}</h2>
         <button onClick={handle_logout} className={styles.logout_btn}>
           <FontAwesomeIcon icon={faSignOut} size="sm" />
           Logout

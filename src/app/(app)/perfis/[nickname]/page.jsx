@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import { createClient } from "@/_lib/supabase/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CIV_COLORS } from "@/_lib/constants";
+import format_nickname from "@/_lib/formatNickname";
 
 // Components
 import { toast } from "sonner";
@@ -140,7 +141,7 @@ const page = () => {
           </div>
         )}
         <h2>
-          {userData?.nickname}
+          {format_nickname(userData?.nickname, 15)}
           {userData?.steam_url && (
             <Link
               href={`${userData.steam_url}`}

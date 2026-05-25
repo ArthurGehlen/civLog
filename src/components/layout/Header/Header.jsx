@@ -3,10 +3,11 @@
 // Utils
 import styles from "./Header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import format_nickname from "@/_lib/formatNickname";
 
 // Hooks
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Components
@@ -34,13 +35,9 @@ const Header = () => {
     { id: 4, content: "Perfis", path: "/perfis" },
   ];
 
-  function format_nickname(nickname) {
-    if (!nickname) return "...";
-
-    const firstName = nickname.split(" ")[0];
-
-    return firstName.length > 8 ? firstName.slice(0, 6) + "…" : firstName;
-  }
+  useEffect(() => {
+    setToggleMenu(false);
+  }, [pathname]);
 
   return (
     <header className={styles.header_wrapper}>
@@ -86,7 +83,7 @@ const Header = () => {
               )}
               <span className={styles.nickname_displayer}>
                 {is_mobile
-                  ? format_nickname(profile?.nickname)
+                  ? format_nickname(profile?.nickname, 6)
                   : (profile?.nickname ?? "...")}
               </span>
             </Link>

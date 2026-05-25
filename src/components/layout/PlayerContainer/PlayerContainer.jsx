@@ -1,6 +1,7 @@
 // Utils
 import styles from "./PlayerContainer.module.css";
 import { CIV_COLORS } from "@/_lib/constants";
+import format_nickname from "@/_lib/formatNickname";
 
 // Components
 import Link from "next/link";
@@ -23,7 +24,7 @@ const PlayerContainer = ({ obj }) => {
             className={styles.nickname}
             href={`/perfis/${p.profiles.nickname}`}
           >
-            {p.profiles.nickname}
+            {format_nickname(p.profiles.nickname, 15)}
           </Link>
 
           {p.civilizations && (

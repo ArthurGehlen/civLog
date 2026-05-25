@@ -1,0 +1,44 @@
+.leaderboard_table {
+  margin-top: 2rem;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: #a0a0a8;
+  margin: 2rem 0;
+}
+
+.player_info:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.player_info:not(:last-child) {
+  border-bottom: 1px solid #2a2a2e;
+}
+
+.player_info {
+  padding-bottom: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.player_info_header {
+  display: flex;
+  gap: 1rem;
+}
+
+.user_label {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.position {
+  padding: 0 1rem;
+  border-right: 1px solid #2a2a2e;
+}
+
+.current_user {
+  color: #c9a84c;
+}

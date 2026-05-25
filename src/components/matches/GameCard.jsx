@@ -13,7 +13,7 @@ import Link from "next/link";
 import Loading from "../layout/Loading/Loading";
 import PlayerContainer from "../layout/PlayerContainer/PlayerContainer";
 import { toast } from "sonner";
-import CivPicker from "../civilizations/CivPicker";
+import CivPicker from "../CivPicker/CivPicker";
 
 const GameCard = ({ game_obj }) => {
   const { user, profile } = useUser();
@@ -81,7 +81,7 @@ const GameCard = ({ game_obj }) => {
           className={game_obj.is_completed ? styles.completed : styles.pending}
         >
           <div className={styles.status_dot}></div>
-          <span>{game_obj.is_completed ? "Concluído" : "Agendado"}</span>
+          <span>{game_obj?.status}</span>
         </div>
         <span>{game_obj.organization}</span>
       </header>
@@ -117,14 +117,16 @@ const GameCard = ({ game_obj }) => {
           Jogadores: <PlayerContainer obj={game_obj?.game_players} />
         </div>
 
-        {!game_obj?.is_completed && alreadyJoined && (
-          <div className={styles.civ_picker_container}>
-            <CivPicker
-              game_players={game_obj.game_players}
-              game_id={game_obj.id}
-            />
-          </div>
-        )}
+        {!game_obj?.is_completed &&
+          alreadyJoined &&
+          game_obj?.status === "Agendado" && (
+            <div className={styles.civ_picker_container}>
+              <CivPicker
+                game_players={game_obj.game_players}
+                game_id={game_obj.id}
+              />
+            </div>
+          )}
 
         {/* container para mais opções */}
         <div className={styles.game_options}>
@@ -138,6 +140,7 @@ const GameCard = ({ game_obj }) => {
           {/* botão pra ingressar no jogo */}
           {!game_obj?.is_completed &&
             MAIN_PLAYERS_ID.includes(user?.id) &&
+            game_obj?.status === "Agendado" &&
             !alreadyJoined && (
               <div className={styles.join_game_container}>
                 <button

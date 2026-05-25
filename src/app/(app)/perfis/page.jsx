@@ -3,6 +3,7 @@
 import { createClient } from "@/_lib/supabase/client";
 import styles from "./page.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import format_nickname from "@/_lib/formatNickname";
 
 // Components
 import Link from "next/link";
@@ -46,7 +47,7 @@ const page = () => {
               ) : (
                 <FontAwesomeIcon icon={faUser} size="lg" />
               )}
-              <span>{user.nickname}</span>
+              <span>{format_nickname(user.nickname, 15)}</span>
             </div>
             <Link
               className={styles.more_details_link}

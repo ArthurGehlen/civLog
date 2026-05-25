@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 
 // Components
 import GameCard from "@/components/matches/GameCard";
+import { toast } from "sonner";
 
 // Context
 import { useUser } from "@/_lib/context/UserContext";
@@ -29,6 +30,7 @@ const Page = () => {
           scheduled_date,
           continuation_date,
           is_completed,
+          status,
           organization,
           map_types ( name ),
           map_sizes ( name ),
@@ -38,11 +40,11 @@ const Page = () => {
             profiles ( nickname, avatar_url ),
             civilizations ( name, icon_url )
           )`,
-        ) // nome_da_tabela (valores) 
+        ) // nome_da_tabela (valores)
         .order("created_at", { ascending: false })
         .limit(3);
       if (error) {
-        console.error(error);
+        toast.error(error.message);
         return;
       }
 
@@ -53,7 +55,7 @@ const Page = () => {
   }, []);
 
   // NÃO DEIXAR CONSOLE.LOG() NO CÓDIGO :)
-  // Quantas vezes eu deixei console.log() no código: 1
+  // Quantas vezes eu deixei console.log() no código: 2
 
   return (
     <>
