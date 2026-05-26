@@ -15,7 +15,7 @@ import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "@/_lib/context/UserContext";
 
 // Components
-import AvatarUpload from "@/components/layout/AvatarUpload/AvatarUpload";
+import AvatarUpload from "@/components/Layout/AvatarUpload/AvatarUpload";
 import { toast } from "sonner";
 
 const page = () => {

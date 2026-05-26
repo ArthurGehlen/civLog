@@ -17,6 +17,7 @@ import Image from "next/image";
 import { toast } from "sonner";
 import LeaderboardChart from "@/components/LeaderboardChart/LeaderboardChart";
 import Link from "next/link";
+import Divider from "@/components/Layout/Divider/Divider";
 
 const page = () => {
   const [userData, setUserData] = useState(null);
@@ -50,6 +51,8 @@ const page = () => {
     };
   }, []);
 
+  // verifica quantos players tem mais vitórias que o primeiro
+  // com isso é feito o sistema de empate
   const players_with_rank = [...(userData ?? [])]
     .sort((a, b) => b.wins - a.wins)
     .map((player, _, arr) => ({
@@ -94,7 +97,7 @@ const page = () => {
         ))}
       </div>
 
-      <div className={styles.divider}></div>
+      <Divider />
 
       {userData && <LeaderboardChart players={userData} />}
     </>

@@ -1,3 +1,4 @@
+// não confundir com "sliceNickname", format corta o nickname com base no primeiro nome
 export default function format_nickname(nickname, max = 15) {
   if (!nickname) return "...";
 

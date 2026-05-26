@@ -7,12 +7,13 @@ import styles from "./page.module.css";
 import { useState, useEffect } from "react";
 
 // Components
-import GameCard from "@/components/matches/GameCard";
+import GameCard from "@/components/GameCard/GameCard";
 import { toast } from "sonner";
+import Divider from "@/components/Layout/Divider/Divider";
 
 // Context
 import { useUser } from "@/_lib/context/UserContext";
-import Loading from "@/components/layout/Loading/Loading";
+import Loading from "@/components/Layout/Loading/Loading";
 
 const Page = () => {
   const [lastMatches, setLastMatches] = useState([]);
@@ -32,9 +33,6 @@ const Page = () => {
           is_completed,
           status,
           organization,
-          map_types ( name ),
-          map_sizes ( name ),
-          game_speeds ( name ),
           game_players (
             is_winner,
             profiles ( nickname, avatar_url ),
@@ -62,10 +60,16 @@ const Page = () => {
       {loading && <Loading />}
       <div className={styles.last_matches_played_wrapper}>
         <h2>Últimas 3 partidas</h2>
-        <hr style={{ margin: "2rem 0" }} />
+        <Divider />
         <div className={styles.last_matches_container}>
-          {lastMatches.map((match) => (
-            <GameCard key={match?.id} game_obj={match} />
+          {lastMatches.map((match, index) => (
+            <div
+              key={match.id}
+              className={styles.card_item}
+              style={{ animationDelay: `${80 + index * 110}ms` }}
+            >
+              <GameCard game_obj={match} />
+            </div>
           ))}
         </div>
       </div>

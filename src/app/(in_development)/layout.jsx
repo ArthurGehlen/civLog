@@ -9,7 +9,7 @@ import { UserProvider } from "@/_lib/context/UserContext";
 import under_construction from "@/assets/under_construction.svg";
 
 // Components
-import Header from "@/components/layout/Header/Header";
+import Header from "@/components/Layout/Header/Header";
 import Image from "next/image";
 
 const layout = ({ children }) => {

@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 // Components
 import Link from "next/link";
-import Captcha from "@/components/captcha/Captcha";
+import Captcha from "@/components/Captcha/Captcha";
 import { toast } from "sonner";
 
 // Images

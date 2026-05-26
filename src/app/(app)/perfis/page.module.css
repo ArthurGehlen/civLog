@@ -41,3 +41,19 @@
   background-color: #c9a84c;
   transition: 0.4s ease width;
 }
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card_item {
+  opacity: 0;
+  animation: card-in 0.45s cubic-bezier(0.22, 0.68, 0, 1.2) forwards;
+}

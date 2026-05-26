@@ -33,6 +33,7 @@ const Header = () => {
     { id: 2, content: "Partidas", path: "/partidas" },
     { id: 3, content: "Leaderboard", path: "/leaderboard" },
     { id: 4, content: "Perfis", path: "/perfis" },
+    { id: 5, content: "Civilizações", path: "/civilizacoes" },
   ];
 
   useEffect(() => {
@@ -53,7 +54,7 @@ const Header = () => {
             <li key={link.id}>
               <Link
                 href={link.path}
-                className={pathname === link.path ? styles.active : ""}
+                className={pathname.includes(link.path) ? styles.active : ""}
               >
                 {link.content}
               </Link>
@@ -102,7 +103,9 @@ const Header = () => {
                   <li key={link.id}>
                     <Link
                       href={link.path}
-                      className={pathname === link.path ? styles.active : ""}
+                      className={
+                        pathname.includes(link.path) ? styles.active : ""
+                      }
                     >
                       {link.content}
                     </Link>

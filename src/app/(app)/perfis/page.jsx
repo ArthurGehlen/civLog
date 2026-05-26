@@ -3,7 +3,7 @@
 import { createClient } from "@/_lib/supabase/client";
 import styles from "./page.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import format_nickname from "@/_lib/formatNickname";
+import slice_nickname from "@/_lib/sliceNickname";
 
 // Components
 import Link from "next/link";
@@ -30,11 +30,13 @@ const page = () => {
     load_users();
   }, []);
 
+
+
   return (
     <>
       <div className={styles.users_container}>
         {users.map((user) => (
-          <div key={user.id} className={styles.user_container}>
+          <div key={user.id} className={`${styles.user_container} ${styles.card_item}`}>
             <div className={styles.user_info}>
               {user.avatar_url ? (
                 <Image
@@ -47,7 +49,7 @@ const page = () => {
               ) : (
                 <FontAwesomeIcon icon={faUser} size="lg" />
               )}
-              <span>{format_nickname(user.nickname, 15)}</span>
+              <span>{slice_nickname(user.nickname)}</span>
             </div>
             <Link
               className={styles.more_details_link}

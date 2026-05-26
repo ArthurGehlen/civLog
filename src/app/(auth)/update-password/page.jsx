@@ -11,7 +11,7 @@ import { createClient } from "@/_lib/supabase/client";
 
 // Components
 import { toast } from "sonner";
-import Loading from "@/components/layout/Loading/Loading";
+import Loading from "@/components/Layout/Loading/Loading";
 
 // Images
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";

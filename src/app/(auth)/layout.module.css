@@ -1,4 +1,5 @@
 .page {
+  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -7,12 +8,42 @@
   color: #e8e8e8;
   font-size: 1rem;
   overflow-y: auto;
+  width: 100%;
+}
+
+.bg_slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  z-index: 0;
+}
+
+.bg_slide.active {
+  opacity: 1;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  z-index: 1;
 }
 
 .auth_container {
+  position: relative;
+  z-index: 2;
   width: 30rem;
   height: fit-content;
-  background-color: #1c1c29;
+  background-color: rgba(28, 28, 41, 0.75);
+  backdrop-filter: blur(8px);
   padding: 2rem;
   display: flex;
   justify-content: center;
@@ -104,7 +135,8 @@
   text-decoration: underline;
 }
 
-.forgot_password {
+.forgot_password,
+.back_link {
   width: 100%;
   text-align: start;
   font-size: 0.8rem;
@@ -139,11 +171,11 @@
 
 .input_label {
   font-size: 0.875rem;
-  color: #a0a0a8;
+  color: #e8e8e8;
 }
 
 .input_container::placeholder {
-  color: #666666;
+  color: #999;
 }
 
 .submit_btn:disabled {
@@ -179,4 +211,14 @@
 
 .input_invalid:focus {
   outline-color: #e05c5c;
+}
+
+@media (max-width: 480px) {
+  .auth_container {
+    width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    padding: 2rem 1.5rem;
+    justify-content: center;
+  }
 }

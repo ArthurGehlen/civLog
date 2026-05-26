@@ -1,6 +1,6 @@
 import React from "react";
 // Components
-import Loading from "@/components/layout/Loading/Loading";
+import Loading from "@/components/Layout/Loading/Loading";
 
 const loading = () => {
   return <Loading />;

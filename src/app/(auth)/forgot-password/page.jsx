@@ -5,7 +5,7 @@ import styles from "../layout.module.css";
 
 // Components
 import { toast } from "sonner";
-import Captcha from "@/components/captcha/Captcha";
+import Captcha from "@/components/Captcha/Captcha";
 
 // Hooks
 import { createClient } from "@/_lib/supabase/client";

@@ -3,6 +3,7 @@
 import styles from "./GameCard.module.css";
 import { MAIN_PLAYERS_ID } from "@/_lib/constants";
 import { useUser } from "@/_lib/context/UserContext";
+import { date_formatter } from "@/_lib/date_formatter";
 
 // Hooks
 import { useEffect, useState } from "react";
@@ -10,8 +11,8 @@ import { createClient } from "@/_lib/supabase/client";
 
 // Components
 import Link from "next/link";
-import Loading from "../layout/Loading/Loading";
-import PlayerContainer from "../layout/PlayerContainer/PlayerContainer";
+import Loading from "../Layout/Loading/Loading";
+import PlayerContainer from "../Layout/PlayerContainer/PlayerContainer";
 import { toast } from "sonner";
 import CivPicker from "../CivPicker/CivPicker";
 
@@ -19,13 +20,6 @@ const GameCard = ({ game_obj }) => {
   const { user, profile } = useUser();
   const supabase = createClient();
   const [alreadyJoined, setAlreadyJoined] = useState(false);
-
-  const date_formatter = new Intl.DateTimeFormat("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    timeZone: "UTC",
-  });
 
   const check_if_user_already_joined = async (game_id) => {
     const { data, error } = await supabase
@@ -72,6 +66,9 @@ const GameCard = ({ game_obj }) => {
     window.location.reload();
   };
 
+  const format_date = (value) =>
+    value ? date_formatter.format(new Date(value)) : null;
+
   return (
     <div className={styles.game_card}>
       {/* header */}
@@ -90,18 +87,12 @@ const GameCard = ({ game_obj }) => {
       <div className={styles.game_dates}>
         <p>
           Data de início:{" "}
-          {date_formatter.format(new Date(game_obj.scheduled_date))}
+          {format_date(game_obj.scheduled_date)}
         </p>
         {game_obj.is_completed ? (
-          <p>
-            Data de conclusão:{" "}
-            {date_formatter.format(new Date(game_obj.continuation_date))}
-          </p>
+          <p>Data de conclusão: {format_date(game_obj.continuation_date)}</p>
         ) : (
-          <p>
-            Data de continuação:{" "}
-            {date_formatter.format(new Date(game_obj.continuation_date))}
-          </p>
+          <p>Data de continuação: {format_date(game_obj.continuation_date)}</p>
         )}
       </div>
 
