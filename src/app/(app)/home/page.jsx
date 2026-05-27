@@ -59,7 +59,7 @@ const Page = () => {
     <>
       {loading && <Loading />}
       <div className={styles.last_matches_played_wrapper}>
-        <h2>Últimas 3 partidas</h2>
+        <h1>Últimas 3 partidas</h1>
         <Divider />
         <div className={styles.last_matches_container}>
           {lastMatches.map((match, index) => (

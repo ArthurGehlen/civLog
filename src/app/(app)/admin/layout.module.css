@@ -1,0 +1,11 @@
+.admin_links {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin_links .current_link {
+  color: #c9a84c;
+  text-decoration: underline;
+}

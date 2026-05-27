@@ -54,7 +54,7 @@ const Header = () => {
             <li key={link.id}>
               <Link
                 href={link.path}
-                className={pathname.includes(link.path) ? styles.active : ""}
+                className={pathname === link.path ? styles.active : ""}
               >
                 {link.content}
               </Link>
@@ -62,7 +62,12 @@ const Header = () => {
           ))}
           {profile?.is_admin && (
             <li>
-              <Link href="/admin">Admin</Link>
+              <Link
+                className={pathname === "/admin" ? styles.active : ""}
+                href="/admin"
+              >
+                Admin
+              </Link>
             </li>
           )}
         </ul>
@@ -103,9 +108,7 @@ const Header = () => {
                   <li key={link.id}>
                     <Link
                       href={link.path}
-                      className={
-                        pathname.includes(link.path) ? styles.active : ""
-                      }
+                      className={pathname === link.path ? styles.active : ""}
                     >
                       {link.content}
                     </Link>
@@ -113,7 +116,12 @@ const Header = () => {
                 ))}
                 {profile?.is_admin && (
                   <li>
-                    <Link href="/admin">Admin</Link>
+                    <Link
+                      href="/admin"
+                      className={pathname === "/admin" ? styles.active : ""}
+                    >
+                      Admin
+                    </Link>
                   </li>
                 )}
               </ul>

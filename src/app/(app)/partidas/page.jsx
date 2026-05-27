@@ -53,8 +53,12 @@ const page = () => {
       <Divider />
 
       <div className={styles.games_wrapper}>
-        {matches.map((match) => (
-          <div key={match.id} className={styles.card_item}>
+        {matches.map((match, index) => (
+          <div
+            key={match.id}
+            className={styles.card_item}
+            style={{ animationDelay: `${80 + index * 110}ms` }}
+          >
             <GameCard game_obj={match} />
           </div>
         ))}
