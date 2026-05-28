@@ -7,17 +7,20 @@ import { date_formatter } from "@/_lib/date_formatter";
 import { useState, useEffect } from "react";
 import { createClient } from "@/_lib/supabase/client";
 import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 // Components
 import Divider from "@/components/Layout/Divider/Divider";
 import { toast } from "sonner";
 import PlayerContainer from "@/components/Layout/PlayerContainer/PlayerContainer";
+import Image from "next/image";
 import Link from "next/link";
 
 const page = () => {
   const [gameData, setGameData] = useState(null);
   const params = useParams();
   const supabase = createClient();
+  const router = useRouter();
 
   useEffect(() => {
     const get_game_details = async () => {
@@ -28,12 +31,14 @@ const page = () => {
             is_winner,
             profiles ( nickname, avatar_url ),
             civilizations ( name, icon_url )
-          )`,
+          ), created_by (nickname, avatar_url) `,
         )
         .eq("id", params.id)
         .single();
 
       if (error) toast.error(error.message);
+
+      console.log(data);
 
       setGameData(data);
     };
@@ -47,6 +52,10 @@ const page = () => {
 
   return (
     <>
+      <button className={styles.back_btn} onClick={() => router.back()}>
+        Voltar
+      </button>
+
       <header className={styles.game_info}>
         <h2>{gameData?.name}</h2>
         <div
@@ -82,20 +91,47 @@ const page = () => {
           Jogadores: <PlayerContainer obj={gameData?.game_players} />
         </div>
 
+        <h2>Configurações da partida</h2>
+        <Divider />
         <div className={styles.map_detail}>
-          Tipo do mapa: <span>{gameData?.map_types.name}</span>
+          <p>
+            Tipo do mapa: <span>{gameData?.map_types.name}</span>
+          </p>
         </div>
         <div className={styles.map_detail}>
-          Tamanho do mapa:{" "}
           <p>
-            {gameData?.map_sizes.name} |{" "}
+            Tamanho do mapa: {gameData?.map_sizes.name} |{" "}
             <span className={styles.players_num_recommended}>
               Recomendado para {gameData?.map_sizes.max_players} jogadores
             </span>
           </p>
         </div>
         <div className={styles.map_detail}>
-          Velocidade da partida: <span>{gameData?.game_speeds.name}</span>
+          <p>
+            Velocidade da partida: <span>{gameData?.game_speeds.name}</span>
+          </p>
+        </div>
+
+        <Divider />
+
+        <div className={styles.created_by}>
+          <span>Partida criada por:</span>
+          <div className={styles.user_info}>
+            <Image
+              height={30}
+              width={30}
+              alt="User Image"
+              src={gameData?.created_by?.avatar_url}
+              style={{ borderRadius: "50%" }}
+            />
+            <Link
+              className={styles.user_link}
+              style={{ transition: ".4s ease color" }}
+              href={`/perfis/${gameData?.created_by.nickname}`}
+            >
+              {gameData?.created_by.nickname}
+            </Link>
+          </div>
         </div>
       </div>
     </>

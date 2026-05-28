@@ -18,8 +18,15 @@ export const CIV_COLORS = {
   Espanha: "#AA151B",
   Suméria: "#8B6914",
   Astecas: "#2D6B3A",
+  Núbia: "#D4A017",
+  Macedônia: "#5C2D91",
+  Pérsia: "#D4AA00",
+  Indonésia: "#9E2E1C",
+  Gorgo: "#7A5C14",
+  "Jayavarman VII": "#C47A1A",
+  Austrália: "#6B7332",
+  "Roma (Júlio César)": "#6B2080",
 };
-
 // apenas estes jogadores irão poder escolher civs em jogos agendados
 export const MAIN_PLAYERS_ID = [
   "80e4931f-22a1-4cf7-9208-88246a99b0e9", // Arthur

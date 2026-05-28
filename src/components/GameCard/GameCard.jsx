@@ -15,6 +15,7 @@ import Loading from "../Layout/Loading/Loading";
 import PlayerContainer from "../Layout/PlayerContainer/PlayerContainer";
 import { toast } from "sonner";
 import CivPicker from "../CivPicker/CivPicker";
+import AdminGameManager from "../AdminGameManager/AdminGameManager";
 
 const GameCard = ({ game_obj }) => {
   const { user, profile } = useUser();
@@ -69,14 +70,25 @@ const GameCard = ({ game_obj }) => {
   const format_date = (value) =>
     value ? date_formatter.format(new Date(value)) : null;
 
+  const format_status = (status) => {
+    switch (status) {
+      case "Concluído":
+        return "completed";
+      case "Em andamento":
+        return "in_progress";
+      case "Agendado":
+        return "pending";
+      default:
+        break;
+    }
+  };
+
   return (
     <div className={styles.game_card}>
       {/* header */}
       <header className={styles.game_info}>
         <h2>{game_obj.name}</h2>
-        <div
-          className={game_obj.is_completed ? styles.completed : styles.pending}
-        >
+        <div className={`${styles[format_status(game_obj?.status)]}`}>
           <div className={styles.status_dot}></div>
           <span>{game_obj?.status}</span>
         </div>
@@ -85,10 +97,7 @@ const GameCard = ({ game_obj }) => {
 
       {/* datas */}
       <div className={styles.game_dates}>
-        <p>
-          Data de início:{" "}
-          {format_date(game_obj.scheduled_date)}
-        </p>
+        <p>Data de início: {format_date(game_obj.scheduled_date)}</p>
         {game_obj.is_completed ? (
           <p>Data de conclusão: {format_date(game_obj.continuation_date)}</p>
         ) : (
@@ -145,6 +154,15 @@ const GameCard = ({ game_obj }) => {
             )}
         </div>
       </div>
+
+      {/* atualização futura :) */}
+      {/* {profile?.is_admin && !game_obj?.is_completed && (
+        <AdminGameManager
+          players={game_obj.game_players}
+          game={game_obj}
+          onUpdated={() => window.location.reload()}
+        />
+      )} */}
     </div>
   );
 };

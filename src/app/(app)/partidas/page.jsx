@@ -50,6 +50,10 @@ const page = () => {
     <>
       <h1>Partidas</h1>
 
+      <p style={{ fontSize: ".85rem", color: "#c9a84c" }}>
+        Todas as partidas já concluídas
+      </p>
+
       <Divider />
 
       <div className={styles.games_wrapper}>

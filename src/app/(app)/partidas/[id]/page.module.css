@@ -12,6 +12,21 @@
   gap: 0.8rem;
 }
 
+.back_btn {
+  padding: 0.6rem 1rem;
+  border-radius: 2rem;
+  background-color: transparent;
+  border: 1px solid #c9a84c;
+  transition: 0.5s ease all;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.back_btn:hover {
+  box-shadow: inset 0 -4rem 0 0 #3d3010;
+}
+
 .completed,
 .pending {
   background-color: transparent;
@@ -87,6 +102,7 @@
 .map_detail {
   display: flex;
   gap: 0.4rem;
+  font-size: clamp(1rem, calc(0.2589vw + 0.9393rem), 1.1rem);
 }
 
 .map_detail:not(:last-child) {
@@ -95,5 +111,27 @@
 
 .players_num_recommended {
   font-size: 0.75rem;
+  color: #c9a84c;
+}
+
+.created_by {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.user_info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background-color: #1c1c20;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.6rem;
+  border: 1px solid #2a2a2e;
+}
+
+.user_link:hover {
   color: #c9a84c;
 }
