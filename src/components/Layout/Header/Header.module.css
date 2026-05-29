@@ -9,7 +9,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: #0e0e10;
-  max-height: 7rem;
+  max-height: 6rem;
 }
 
 .header_links {
@@ -41,10 +41,16 @@
 
 .active::before {
   width: 100%;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background-color: #c9a84c;
+  transition: 0.4s ease width;
 }
 
-.header_links li::before,
-.active::before {
+.header_links li::before {
   content: "";
   position: absolute;
   bottom: 0;
