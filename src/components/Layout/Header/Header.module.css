@@ -9,7 +9,22 @@
   justify-content: space-between;
   align-items: center;
   background-color: #0e0e10;
-  max-height: 7rem;
+  max-height: 8rem;
+}
+
+.logo_link {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
+.version_container {
+  font-size: 0.8rem;
+  border: 1px solid #c9a84c;
+  width: fit-content;
+  text-align: center;
+  padding: .2rem 0.6rem;
+  border-radius: 2rem;
 }
 
 .header_links {
@@ -114,7 +129,7 @@
   position: relative;
 }
 
-@media screen and (max-width: 709px) {
+@media screen and (max-width: 969px) {
   .header_wrapper {
     padding: var(--global_component_padding_mobile);
   }

@@ -64,6 +64,8 @@ const page = () => {
     <>
       <h1>Leaderboard</h1>
 
+      <Divider />
+
       <div className={styles.leaderboard_table}>
         {players_with_rank.map((player, index) => (
           <div

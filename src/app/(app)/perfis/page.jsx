@@ -10,6 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import Divider from "@/components/Layout/Divider/Divider";
 
 // Icons
 import { faUser } from "@fortawesome/free-regular-svg-icons";
@@ -30,13 +31,16 @@ const page = () => {
     load_users();
   }, []);
 
-
-
   return (
     <>
+      <h1>Perfis</h1>
+      <Divider />
       <div className={styles.users_container}>
         {users.map((user) => (
-          <div key={user.id} className={`${styles.user_container} ${styles.card_item}`}>
+          <div
+            key={user.id}
+            className={`${styles.user_container} ${styles.card_item}`}
+          >
             <div className={styles.user_info}>
               {user.avatar_url ? (
                 <Image

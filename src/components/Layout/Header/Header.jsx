@@ -43,8 +43,13 @@ const Header = () => {
   return (
     <header className={styles.header_wrapper}>
       <h1>
-        <Link href="/home">
-          <Logo />
+        <Link href="/home" className={styles.logo_link}>
+          <div>
+            <Logo />
+          </div>
+          <div className={styles.version_container}>
+            <span>{process.env.NEXT_PUBLIC_APP_VERSION}</span>
+          </div>
         </Link>
       </h1>
 
