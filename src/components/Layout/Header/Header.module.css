@@ -9,7 +9,6 @@
   justify-content: space-between;
   align-items: center;
   background-color: #0e0e10;
-<<<<<<< HEAD
   max-height: 8rem;
 }
 
@@ -26,9 +25,6 @@
   text-align: center;
   padding: .2rem 0.6rem;
   border-radius: 2rem;
-=======
-  max-height: 6rem;
->>>>>>> 534c56eaef114a4cd6f02ac3f5e416617a41487b
 }
 
 .header_links {
