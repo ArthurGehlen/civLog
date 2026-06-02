@@ -9,6 +9,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: #0e0e10;
+<<<<<<< HEAD
   max-height: 8rem;
 }
 
@@ -25,6 +26,9 @@
   text-align: center;
   padding: .2rem 0.6rem;
   border-radius: 2rem;
+=======
+  max-height: 6rem;
+>>>>>>> 534c56eaef114a4cd6f02ac3f5e416617a41487b
 }
 
 .header_links {
@@ -56,10 +60,16 @@
 
 .active::before {
   width: 100%;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background-color: #c9a84c;
+  transition: 0.4s ease width;
 }
 
-.header_links li::before,
-.active::before {
+.header_links li::before {
   content: "";
   position: absolute;
   bottom: 0;
